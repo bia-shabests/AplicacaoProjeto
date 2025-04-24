@@ -30,10 +30,10 @@ namespace DataAccess.Repositorys
             return categoria;
         }
 
-        public async Task<List<Categoria>> BuscarCategoriasAsync(int? id, string nome, string status, string ordenarPor = "Id", string ordenacao = "ASC")
+        public async Task<List<Categoria>> BuscarCategorias(int? ID, string? nome, bool? status, string? ordenarPor, string ordenacao)
         {
             var parametros = new DynamicParameters();
-            parametros.Add("p_Id", id);
+            parametros.Add("p_ID", ID);
             parametros.Add("p_Nome", nome);
             parametros.Add("p_Status", status);
             parametros.Add("p_OrdenarPor", ordenarPor);

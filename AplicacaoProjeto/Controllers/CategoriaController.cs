@@ -33,10 +33,6 @@ namespace AplicacaoProjeto.Controllers
                 }
                 return BadRequest($"Não foi possivel cadastrar a categoria. CategoriaNome: {nomeCategoria}.");
             }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(new { erro = ex.Message });
-            }
             catch (Exception ex)
             {
                 return StatusCode(500, new { erro = "Ocorreu um erro ao processar a requisição." });
@@ -47,16 +43,20 @@ namespace AplicacaoProjeto.Controllers
         [SwaggerOperation(Summary = "Buscar categorias", OperationId = "Get")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> BuscarCategorias([FromQuery] int? id, [FromQuery] string? nome, [FromQuery] bool? status, [FromQuery] string? ordenarPor, [FromQuery] string ordenacao)
+        public async Task<IActionResult> BuscarCategorias([FromQuery] int? id, [FromQuery] string? nome, [FromQuery] bool? status, [FromQuery] string? ordenarPor, [FromQuery] string tipoOrdenacao)
         {
             try
             {
-                var categorias = await _categoriaService.BuscarCategorias(id, nome, status, ordenarPor, ordenacao);
+                var categorias = await _categoriaService.BuscarCategorias(id, nome, status, ordenarPor, tipoOrdenacao);
                 if (categorias == null || !categorias.Any())
                 {
                     return NotFound("Nenhuma categoria encontrada.");
                 }
                 return Ok(categorias);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex);
             }
             catch (Exception ex)
             {

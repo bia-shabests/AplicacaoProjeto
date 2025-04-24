@@ -30,9 +30,15 @@ namespace ApplicationServices
             return await _categoriaRepository.CadastrarCategoria(categoria);
         }
         
-        public async Task<List<Categoria>> BuscarCategorias(int? id, string? nome, bool? status)
+        public async Task<List<Categoria>> BuscarCategorias(int? ID, string? nome, bool? status, string? ordenarPor, string tipoOrdenacao)
         {
+            if (tipoOrdenacao != "ASC" && tipoOrdenacao != "DESC")
+            {
+                throw new ArgumentException("O parâmetro 'ordenacao' deve ser 'ASC' ou 'DESC'.");
+            }
+            string campoOrdenacao = string.IsNullOrEmpty(ordenarPor) ? "ID" : ordenarPor;
 
+            return await _categoriaRepository.BuscarCategorias(ID, nome, status, campoOrdenacao, tipoOrdenacao);
         }
 
         private void ValidarCategoria(string nomeCategoria)

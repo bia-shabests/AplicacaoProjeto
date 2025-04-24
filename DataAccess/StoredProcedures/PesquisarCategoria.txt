@@ -1,0 +1,38 @@
+DELIMITER $$
+
+CREATE PROCEDURE Categoria_BuscarCategorias (
+    IN p_Id INT,
+    IN p_Nome VARCHAR(150),
+    IN p_Status VARCHAR(50),
+    IN p_Ordenar_Por VARCHAR(50),
+    IN p_Ordenacao VARCHAR(4) -- 'ASC' ou 'DESC'
+)
+BEGIN
+    SET @query = 'SELECT * FROM Categoria WHERE 1 = 1';
+
+    IF p_Id IS NOT NULL THEN
+        SET @query = CONCAT(@query, ' AND Id = ', p_Id);
+    END IF;
+
+    IF p_Nome IS NOT NULL AND p_Nome != '' THEN
+        SET @query = CONCAT(@query, ' AND Nome LIKE ''%', p_Nome, '%''');
+    END IF;
+
+    IF p_Status IS NOT NULL AND p_Status != '' THEN
+        SET @query = CONCAT(@query, ' AND Status = ''', p_Status, '''');
+    END IF;
+
+    IF p_Ordenar_Por IS NOT NULL AND p_Ordenar_Por != '' THEN
+        SET @query = CONCAT(@query, ' ORDER BY ', p_Ordenar_Por);
+        
+        IF p_Ordenacao IS NOT NULL AND (UPPER(p_Ordenacao) = 'ASC' OR UPPER(p_Ordenacao) = 'DESC') THEN
+            SET @query = CONCAT(@query, ' ', p_Ordenacao);
+        END IF;
+    END IF;
+
+    PREPARE stmt FROM @query;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+END $$
+
+DELIMITER ;

@@ -1,0 +1,20 @@
+Listas:
+Definição: Uma lista é uma coleção ordenada de elementos, onde cada elemento pode ser acessado por sua posição (índice).
+Operações Comuns: Inserção, remoção, busca, e iteração.
+
+
+Pilhas:
+Definição: Uma pilha é uma estrutura de dados que segue o princípio LIFO (Last In, First Out), onde o último elemento inserido é o primeiro a ser removido.
+Operações Comuns: Push (inserir), pop (remover), peek (ver o topo), e isEmpty (verificar se está vazia).
+
+Filas:
+Definição: Uma fila é uma estrutura de dados que segue o princípio FIFO (First In, First Out), onde o primeiro elemento inserido é o primeiro a ser removido.
+Operações Comuns: Enqueue (inserir), dequeue (remover), peek (ver o início), e isEmpty (verificar se está vazia).
+
+Árvores:
+Definição: Uma árvore é uma estrutura de dados hierárquica composta por nós, onde cada nó tem um valor e referências para outros nós (filhos).
+Operações Comuns: Inserção, remoção, busca, travessia (pré-ordem, em-ordem, pós-ordem).
+
+Tabela Hash:
+Definição: Uma tabela hash é uma estrutura de dados que mapeia chaves a valores usando uma função de hash para determinar o índice onde o valor será armazenado.
+Operações Comuns: Inserção, remoção, busca, e tratamento de colisões (chaining, open addressing).

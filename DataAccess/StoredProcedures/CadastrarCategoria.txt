@@ -1,0 +1,18 @@
+DELIMITER $$
+
+CREATE OR ALTER PROCEDURE Categoria_CadastrarCategoria (
+    IN Nome VARCHAR(255),
+    IN Status VARCHAR(50),
+    IN DataCriacao DATETIME,
+    IN DataModificacao DATETIME
+)
+BEGIN
+    -- Inserir categoria
+    INSERT INTO Categoria (Nome, Status, DataCriacao, DataModificacao)
+    VALUES (Nome, Status, DataCriacao, DataModificacao);
+    
+    -- Retornar o ID da categoria inserida
+    SELECT LAST_INSERT_ID() AS CategoriaId;
+END $$
+
+DELIMITER ;

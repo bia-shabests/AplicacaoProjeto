@@ -1,6 +1,8 @@
-﻿using ApplicationServices;
+﻿using ApplicationServices.Services;
+using Castle.Core.Logging;
 using Domain.Models;
-using Domain.Repositorys_interfaces_;
+using Domain.Repositorys;
+using Microsoft.Extensions.Logging;
 using Moq;
 
 namespace Tests.TesteServices
@@ -9,12 +11,14 @@ namespace Tests.TesteServices
     public class CategoriaServiceUnitTest
     {
         private readonly Mock<ICategoriaRepository> _categoriaRepositoryMock;
+        private readonly Mock<ILogger<CategoriaService>> _logger;
         private readonly CategoriaService _categoriaService;
 
         public CategoriaServiceUnitTest()
         {
             _categoriaRepositoryMock = new Mock<ICategoriaRepository>();
-            _categoriaService = new CategoriaService(_categoriaRepositoryMock.Object);
+            _logger = new Mock<ILogger<CategoriaService>>();
+            _categoriaService = new CategoriaService(_categoriaRepositoryMock.Object, _logger.Object);
         }
 
         [TestMethod]

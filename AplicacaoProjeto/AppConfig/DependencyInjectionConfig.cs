@@ -1,7 +1,7 @@
-﻿using ApplicationServices;
+﻿using ApplicationServices.Services;
 using DataAccess.Repositorys;
-using Domain.Repositorys_interfaces_;
-using Domain.Services_Interfaces_;
+using Domain.Repositorys;
+using Domain.Services;
 
 namespace AplicacaoProjeto.AppConfig
 {

@@ -1,18 +1,21 @@
 ﻿using Moq;
 using Microsoft.AspNetCore.Mvc;
-using Domain.Services_Interfaces_;
+using Domain.Services;
 using AplicacaoProjeto.Controllers;
 using Domain.Models;
+using Microsoft.Extensions.Logging;
 
 public class CategoriaControllerTests
 {
     private readonly Mock<ICategoriaService> _categoriaServiceMock;
+    private readonly Mock<ILogger<CategoriaController>> _logger;
     private readonly CategoriaController _controller;
 
     public CategoriaControllerTests()
     {
         _categoriaServiceMock = new Mock<ICategoriaService>();
-        _controller = new CategoriaController(_categoriaServiceMock.Object);
+        _logger = new Mock<ILogger<CategoriaController>>();
+        _controller = new CategoriaController(_categoriaServiceMock.Object, _logger.Object);
     }
 
     [Fact]

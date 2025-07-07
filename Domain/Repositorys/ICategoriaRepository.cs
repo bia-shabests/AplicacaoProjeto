@@ -1,6 +1,6 @@
 ﻿using Domain.Models;
 
-namespace Domain.Repositorys_interfaces_
+namespace Domain.Repositorys
 {
     public interface ICategoriaRepository
     {

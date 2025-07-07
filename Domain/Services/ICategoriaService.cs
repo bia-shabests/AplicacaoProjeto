@@ -1,6 +1,6 @@
 ﻿using Domain.Models;
 
-namespace Domain.Services_Interfaces_
+namespace Domain.Services
 {
     public interface ICategoriaService
     {

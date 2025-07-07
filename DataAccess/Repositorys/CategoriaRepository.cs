@@ -1,7 +1,7 @@
 ﻿using Dapper;
 using DataAccess.Common;
 using Domain.Models;
-using Domain.Repositorys_interfaces_;
+using Domain.Repositorys;
 using Microsoft.Extensions.Configuration;
 
 namespace DataAccess.Repositorys

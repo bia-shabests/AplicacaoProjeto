@@ -59,7 +59,7 @@ Mesmo simples, foi importante para entender **procedures**, **acesso a banco via
 - **Logs estruturados**
   - Toda ação relevante é logada (Controller + Service)
  
-##Proxímas funcionalidades:
+## Proxímas funcionalidades:
 
 - **Controle de Usuários**
   - Registro e Login usando Identity

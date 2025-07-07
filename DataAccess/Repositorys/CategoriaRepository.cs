@@ -8,23 +8,23 @@ namespace DataAccess.Repositorys
 {
     public class CategoriaRepository : ICategoriaRepository
     {
-        private readonly string _connectionStringMySql;
+        private readonly string _connectionStringSql;
         private readonly IConfiguration _configuration;
         public CategoriaRepository(IConfiguration configuration)
         {
             _configuration = configuration;
-            _connectionStringMySql = _configuration.GetConnectionString("MySqlConnection")!;
+            _connectionStringSql = _configuration.GetConnectionString("DefaultConnection")!;
         }
 
         public async Task<Categoria> CadastrarCategoria(Categoria categoria)
         {
             var parametros = new DynamicParameters();
-            parametros.Add("Nome", categoria.Nome);
-            parametros.Add("Status", categoria.Status);
-            parametros.Add("DataCriacao", categoria.DataCriacao);
-            parametros.Add("DataModificacao", categoria.DataModificacao);
+            parametros.Add("@Nome", categoria.Nome);
+            parametros.Add("@Status", categoria.Status);
+            parametros.Add("@DataCriacao", categoria.DataCriacao);
+            parametros.Add("@DataModificacao", categoria.DataModificacao);
 
-            var resultado = await DatabaseExecutor.QueryFirstOrDefaultAsync<int>(_connectionStringMySql,"Categoria_CadastrarCategoria", parametros);
+            var resultado = await DatabaseExecutor.QueryFirstOrDefaultAsync<int>(_connectionStringSql,"Categoria_CadastrarCategoria", parametros);
 
             categoria.ID = resultado;
             return categoria;
@@ -33,13 +33,13 @@ namespace DataAccess.Repositorys
         public async Task<List<Categoria>> BuscarCategorias(int? ID, string? nome, bool? status, string? ordenarPor, string ordenacao)
         {
             var parametros = new DynamicParameters();
-            parametros.Add("p_ID", ID);
-            parametros.Add("p_Nome", nome);
-            parametros.Add("p_Status", status);
-            parametros.Add("p_OrdenarPor", ordenarPor);
-            parametros.Add("p_Ordenacao", ordenacao);
+            parametros.Add("@ID", ID);
+            parametros.Add("@Nome", nome);
+            parametros.Add("@Status", status);
+            parametros.Add("@OrdenarPor", ordenarPor);
+            parametros.Add("@Ordenacao", ordenacao);
 
-            return await DatabaseExecutor.QueryAsync<Categoria>(_connectionStringMySql,"Categoria_BuscarCategorias",parametros);
+            return await DatabaseExecutor.QueryAsync<Categoria>(_connectionStringSql,"Categoria_BuscarCategorias",parametros);
         }
     }
 }

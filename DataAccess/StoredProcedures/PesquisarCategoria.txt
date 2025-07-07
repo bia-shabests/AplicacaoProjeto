@@ -1,38 +1,33 @@
-DELIMITER $$
-
-CREATE PROCEDURE Categoria_BuscarCategorias (
-    IN p_ID INT,
-    IN p_Nome VARCHAR(150),
-    IN p_Status VARCHAR(50),
-    IN p_Ordenar_Por VARCHAR(50),
-    IN p_Ordenacao VARCHAR(4) -- 'ASC' ou 'DESC'
-)
+CREATE OR ALTER PROCEDURE Categoria_BuscarCategorias
+    @ID INT = NULL,
+    @Nome NVARCHAR(150) = NULL,
+    @Status BIT = NULL,
+    @Ordenar_Por NVARCHAR(50) = NULL,
+    @Ordenacao NVARCHAR(4) = NULL -- 'ASC' ou 'DESC'
+AS
 BEGIN
-    SET @query = 'SELECT * FROM Categoria WHERE 1 = 1';
+    SET NOCOUNT ON;
 
-    IF p_ID IS NOT NULL THEN
-        SET @query = CONCAT(@query, ' AND Id = ', p_ID);
-    END IF;
+    DECLARE @sql NVARCHAR(MAX);
+    DECLARE @paramDefs NVARCHAR(MAX);
 
-    IF p_Nome IS NOT NULL AND p_Nome != '' THEN
-        SET @query = CONCAT(@query, ' AND Nome LIKE ''%', p_Nome, '%''');
-    END IF;
+    SET @sql = N'SELECT * FROM Categoria WHERE 1 = 1';
 
-    IF p_Status IS NOT NULL AND p_Status != '' THEN
-        SET @query = CONCAT(@query, ' AND Status = ''', p_Status, '''');
-    END IF;
+    IF @ID IS NOT NULL
+        SET @sql += N' AND Id = @ID';
 
-    IF p_Ordenar_Por IS NOT NULL AND p_Ordenar_Por != '' THEN
-        SET @query = CONCAT(@query, ' ORDER BY ', p_Ordenar_Por);
-        
-        IF p_Ordenacao IS NOT NULL AND (UPPER(p_Ordenacao) = 'ASC' OR UPPER(p_Ordenacao) = 'DESC') THEN
-            SET @query = CONCAT(@query, ' ', p_Ordenacao);
-        END IF;
-    END IF;
+    IF @Nome IS NOT NULL AND LEN(@Nome) > 0
+        SET @sql += N' AND Nome LIKE ''%'' + @Nome + ''%''';
 
-    PREPARE stmt FROM @query;
-    EXECUTE stmt;
-    DEALLOCATE PREPARE stmt;
-END $$
+    IF @Status IS NOT NULL
+        SET @sql += N' AND Status = @Status';
 
-DELIMITER ;
+    IF @Ordenar_Por IS NOT NULL AND LEN(@Ordenar_Por) > 0
+    BEGIN
+        SET @sql += N' ORDER BY ' + QUOTENAME(@Ordenar_Por) + ' ' + @Ordenacao;
+    END
+
+    SET @paramDefs = N'@ID INT, @Nome NVARCHAR(150), @Status BIT';
+
+    EXEC sp_executesql @sql, @paramDefs, @ID = @ID, @Nome = @Nome, @Status = @Status;
+END;

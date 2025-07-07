@@ -1,5 +1,5 @@
 ﻿using Dapper;
-using MySql.Data.MySqlClient;
+using Microsoft.Data.SqlClient;
 using System.Data;
 
 namespace DataAccess.Common
@@ -9,7 +9,7 @@ namespace DataAccess.Common
         public static void Execute(string connectionString, string procedure, DynamicParameters parametros = null, int timeout = 30,
              CommandType commandType = CommandType.StoredProcedure)
         {
-            using (MySqlConnection dbConnection = new MySqlConnection(connectionString))
+            using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -25,7 +25,7 @@ namespace DataAccess.Common
         public static async Task ExecuteAsync(string connectionString, string procedure, DynamicParameters parametros = null, int timeout = 30,
             CommandType commandType = CommandType.StoredProcedure)
         {
-            using (MySqlConnection dbConnection = new MySqlConnection(connectionString))
+            using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -43,7 +43,7 @@ namespace DataAccess.Common
             CommandType commandType = CommandType.StoredProcedure)
         {
             List<T> resultado;
-            using (MySqlConnection dbConnection = new MySqlConnection(connectionString))
+            using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -61,7 +61,7 @@ namespace DataAccess.Common
             CommandType commandType = CommandType.StoredProcedure)
         {
             IEnumerable<T> resultado;
-            using (MySqlConnection dbConnection = new MySqlConnection(connectionString))
+            using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -80,7 +80,7 @@ namespace DataAccess.Common
             CommandType commandType = CommandType.StoredProcedure)
         {
             T resultado;
-            using (MySqlConnection dbConnection = new MySqlConnection(connectionString))
+            using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -98,7 +98,7 @@ namespace DataAccess.Common
             CommandType commandType = CommandType.StoredProcedure)
         {
             T resultado;
-            using (MySqlConnection dbConnection = new MySqlConnection(connectionString))
+            using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
                 try
                 {
@@ -117,7 +117,7 @@ namespace DataAccess.Common
             CommandType commandType = CommandType.StoredProcedure)
         {
             T resultado;
-            using (MySqlConnection dbConnection = new MySqlConnection(connectionString))
+            using (SqlConnection dbConnection = new SqlConnection(connectionString))
             {
                 try
                 {

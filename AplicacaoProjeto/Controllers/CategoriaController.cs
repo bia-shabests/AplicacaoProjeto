@@ -43,7 +43,7 @@ namespace AplicacaoProjeto.Controllers
         [SwaggerOperation(Summary = "Buscar categorias", OperationId = "Get")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> BuscarCategorias([FromQuery] int? id, [FromQuery] string? nome, [FromQuery] bool? status, [FromQuery] string? ordenarPor, [FromQuery] string tipoOrdenacao)
+        public async Task<IActionResult> BuscarCategorias([FromQuery] int? id, [FromQuery] string? nome, [FromQuery] bool? status, [FromQuery] string? ordenarPor, [FromQuery] string? tipoOrdenacao)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace AplicacaoProjeto.Controllers
             }
             catch (ArgumentException ex)
             {
-                return BadRequest(ex);
+                return BadRequest("tipoOrdenacao não pode ser null. Você deve passar ASC ou DESC.");
             }
             catch (Exception ex)
             {

@@ -1,0 +1,8 @@
+CREATE TABLE Categoria
+(
+    ID INT IDENTITY(1,1) PRIMARY KEY,
+    Nome NVARCHAR(100) NOT NULL,
+    Status BIT NOT NULL,
+    DataCriacao DATETIME NOT NULL,
+    DataModificacao DATETIME NULL
+);

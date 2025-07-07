@@ -36,7 +36,7 @@ namespace DataAccess.Repositorys
             parametros.Add("@ID", ID);
             parametros.Add("@Nome", nome);
             parametros.Add("@Status", status);
-            parametros.Add("@OrdenarPor", ordenarPor);
+            parametros.Add("@Ordenar_Por", ordenarPor);
             parametros.Add("@Ordenacao", ordenacao);
 
             return await DatabaseExecutor.QueryAsync<Categoria>(_connectionStringSql,"Categoria_BuscarCategorias",parametros);

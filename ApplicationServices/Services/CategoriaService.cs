@@ -32,7 +32,7 @@ namespace ApplicationServices
         
         public async Task<List<Categoria>> BuscarCategorias(int? ID, string? nome, bool? status, string? ordenarPor, string tipoOrdenacao)
         {
-            if (tipoOrdenacao == null || tipoOrdenacao != "ASC" && tipoOrdenacao != "DESC")
+            if (tipoOrdenacao == null || tipoOrdenacao.ToUpper() != "ASC" && tipoOrdenacao.ToUpper() != "DESC")
             {
                 throw new ArgumentException("O parâmetro 'ordenacao' deve ser 'ASC' ou 'DESC'.");
             }

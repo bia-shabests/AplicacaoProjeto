@@ -21,7 +21,7 @@ namespace AplicacaoProjeto.Controllers
         [SwaggerOperation(Summary = "Salva categorias", OperationId = "Post")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> SalvarCategoria([FromQuery] string nomeCategoria)
+        public async Task<IActionResult> SalvarCategoria([FromBody] string nomeCategoria)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace AplicacaoProjeto.Controllers
             }
             catch (ArgumentException ex)
             {
-                return BadRequest("tipoOrdenacao não pode ser null. Você deve passar ASC ou DESC.");
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {

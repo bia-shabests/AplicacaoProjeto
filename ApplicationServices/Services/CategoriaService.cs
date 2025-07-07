@@ -52,22 +52,5 @@ namespace ApplicationServices
             if (!Regex.IsMatch(nomeCategoria, @"^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$"))
                 throw new ArgumentException("O nome não pode conter símbolos. Apenas letras e acentuação são permitidas.");
         }
-
-
-
-
-
-        //CREATE TABLE[Projeto].Subcategoria
-        //(
-        //ID INT identity(1,1) not null //incluir PRIMARY KEY
-        //,Nome VARCHAR(100)NOT NULL
-        //, Status BIT NOT NULL
-        //,DataCriacao DATETIME NOT NULL
-        //, DataModificacao DATETIME
-        //FOREIGN KEY(ID) REFERENCES [Projeto].Categoria(ID)
-        //)
-
-        //o primeiro ID é da tabela atual (ou seja, tabela de subcategoria) e a REFERENCE que vai ser nossa FK é da Tabela Categoria
-
     }
 }

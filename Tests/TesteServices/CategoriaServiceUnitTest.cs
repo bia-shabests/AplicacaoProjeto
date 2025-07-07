@@ -1,0 +1,91 @@
+﻿using ApplicationServices;
+using Domain.Models;
+using Domain.Repositorys_interfaces_;
+using Moq;
+
+namespace Tests.TesteServices
+{
+    [TestClass]
+    public class CategoriaServiceUnitTest
+    {
+        private readonly Mock<ICategoriaRepository> _categoriaRepositoryMock;
+        private readonly CategoriaService _categoriaService;
+
+        public CategoriaServiceUnitTest()
+        {
+            _categoriaRepositoryMock = new Mock<ICategoriaRepository>();
+            _categoriaService = new CategoriaService(_categoriaRepositoryMock.Object);
+        }
+
+        [TestMethod]
+        public async Task SalvarCategoria_Valido_DeveSalvarERetornarCategoria()
+        {
+            // Arrange
+            string nome = "Bebidas";
+            var categoriaEsperada = new Categoria { ID = 1, Nome = nome, Status = true };
+
+            _categoriaRepositoryMock
+                .Setup(r => r.CadastrarCategoria(It.IsAny<Categoria>()))
+                .ReturnsAsync(categoriaEsperada);
+
+            // Act
+            var resultado = await _categoriaService.SalvarCategoria(nome);
+
+            // Assert
+            Assert.IsNotNull(resultado);
+            Assert.AreEqual(nome, resultado.Nome);
+            Assert.IsTrue(resultado.Status);
+            _categoriaRepositoryMock.Verify(r => r.CadastrarCategoria(It.IsAny<Categoria>()), Times.Once);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public async Task SalvarCategoria_NomeVazio_DeveLancarArgumentException()
+        {
+            // Arrange
+            string nomeInvalido = "   ";
+
+            // Act
+            await _categoriaService.SalvarCategoria(nomeInvalido);
+
+            // Assert é tratado pelo ExpectedException
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public async Task BuscarCategorias_OrdenacaoInvalida_DeveLancarArgumentException()
+        {
+            // Arrange
+            string ordenacaoInvalida = "INVALID";
+
+            // Act
+            await _categoriaService.BuscarCategorias(null, null, null, null, ordenacaoInvalida);
+
+            // Assert é tratado pelo ExpectedException
+        }
+
+        [TestMethod]
+        public async Task BuscarCategorias_ParametrosValidos_DeveChamarRepositorio()
+        {
+            // Arrange
+            var categorias = new List<Categoria>
+            {
+                new Categoria { ID = 1, Nome = "Bebidas", Status = true },
+                new Categoria { ID = 2, Nome = "Comidas", Status = true }
+            };
+
+            _categoriaRepositoryMock
+                .Setup(r => r.BuscarCategorias(null, null, null, "ID", "ASC"))
+                .ReturnsAsync(categorias);
+
+            // Act
+            var resultado = await _categoriaService.BuscarCategorias(null, null, null, null, "ASC");
+
+            // Assert
+            Assert.IsNotNull(resultado);
+            Assert.AreEqual(2, resultado.Count);
+            _categoriaRepositoryMock.Verify(r => r.BuscarCategorias(null, null, null, "ID", "ASC"), Times.Once);
+        }
+    }
+
+}

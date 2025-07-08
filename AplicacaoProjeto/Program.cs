@@ -22,6 +22,15 @@ Log.Logger = new LoggerConfiguration()
     .Enrich.FromLogContext()
     .CreateLogger();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontendPolicy",
+        policy => policy
+            .WithOrigins("http://localhost:5173") // Porta do Vite!
+            .AllowAnyHeader()
+            .AllowAnyMethod());
+});
+
 builder.Host.UseSerilog();
 
 builder.Configuration.AddUserSecrets<Program>();
@@ -32,5 +41,6 @@ app.UseHttpsRedirection();
 app.UseCustomSwagger();
 app.UseAuthorization();
 app.MapControllers();
+app.UseCors("FrontendPolicy");
 
 await app.RunAsync();

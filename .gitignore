@@ -360,3 +360,15 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Node modules do Vue
+/frontend/node_modules
+
+# Build do Vue
+/frontend/dist
+
+# arquivos de log do npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/frontend/.env

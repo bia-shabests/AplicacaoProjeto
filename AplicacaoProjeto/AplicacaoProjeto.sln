@@ -34,6 +34,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsController", "..\Tests
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Frontend", "0 - Frontend", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Frontend", "..\Frontend\", "{8A3AF94E-6D58-F9E9-3B30-A89F5F93011C}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_58494"
+		Debug.AspNetCompiler.PhysicalPath = "..\Frontend\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58494\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_58494"
+		Release.AspNetCompiler.PhysicalPath = "..\Frontend\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58494\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "58494"
+		SlnRelativePath = "..\Frontend\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -68,6 +89,10 @@ Global
 		{930FFB89-409D-4388-8C00-DFD1EFE23F31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{930FFB89-409D-4388-8C00-DFD1EFE23F31}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{930FFB89-409D-4388-8C00-DFD1EFE23F31}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A3AF94E-6D58-F9E9-3B30-A89F5F93011C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A3AF94E-6D58-F9E9-3B30-A89F5F93011C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A3AF94E-6D58-F9E9-3B30-A89F5F93011C}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A3AF94E-6D58-F9E9-3B30-A89F5F93011C}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +105,7 @@ Global
 		{FBFE103E-3BE8-45E9-9898-F7345D4A01AE} = {D9926DE0-F049-45F8-BFED-9C50E22DA6C6}
 		{873F098D-86A8-47B0-BA11-8468567EC730} = {0FADB46E-4538-4052-888C-F773F8090BD7}
 		{930FFB89-409D-4388-8C00-DFD1EFE23F31} = {0FADB46E-4538-4052-888C-F773F8090BD7}
+		{8A3AF94E-6D58-F9E9-3B30-A89F5F93011C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1CDDFBA4-CC3B-4366-9751-B6093320F767}

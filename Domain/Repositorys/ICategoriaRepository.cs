@@ -6,5 +6,6 @@ namespace Domain.Repositorys
     {
         Task<Categoria> CadastrarCategoria(Categoria categoria);
         Task<List<Categoria>> BuscarCategorias(int? ID, string? nome, bool? status, string? ordenarPor, string ordenacao);
+        Task<Categoria> AtualizarCategoria(int ID, string novoNome, DateTime dataModificacao);
     }
 }

@@ -1,0 +1,18 @@
+CREATE OR ALTER PROCEDURE Categoria_AtualizarCategoria
+    @ID INT,
+    @NovoNome NVARCHAR(100),
+    @DataModificacao DATETIME
+AS
+BEGIN
+    IF EXISTS (SELECT 1 FROM Categoria WHERE ID = @ID)
+    BEGIN
+        UPDATE Categoria
+        SET Nome = @NovoNome,
+            DataModificacao = @DataModificacao
+        WHERE ID = @ID;
+
+        SELECT * 
+        FROM Categoria
+        WHERE ID = @ID;
+    END
+END;

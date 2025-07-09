@@ -90,6 +90,62 @@ namespace Tests.TesteServices
             Assert.AreEqual(2, resultado.Count);
             _categoriaRepositoryMock.Verify(r => r.BuscarCategorias(null, null, null, "ID", "ASC"), Times.Once);
         }
-    }
 
+        [TestMethod]
+        public async Task EditarCategoria_DeveRetornarCategoria_QuandoCategoriaExistir()
+        {
+            // Arrange
+            var categoriaEsperada = new Categoria { ID = 1, Nome = "Nova Categoria" };
+            _categoriaRepositoryMock
+                .Setup(r => r.AtualizarCategoria(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<DateTime>()))
+                .ReturnsAsync(categoriaEsperada);
+
+            // Act
+            var resultado = await _categoriaService.EditarCategoria(1, "Nova Categoria");
+
+            // Assert
+            Assert.IsNotNull(resultado);
+            Assert.AreEqual(categoriaEsperada.ID, resultado.ID);
+            Assert.AreEqual(categoriaEsperada.Nome, resultado.Nome);
+        }
+
+        [TestMethod]
+        public async Task EditarCategoria_DeveChamarRepositorio_QuandoNomeValido()
+        {
+            // Arrange
+            var categoriaEsperada = new Categoria { ID = 1, Nome = "Valido" };
+            _categoriaRepositoryMock
+                .Setup(r => r.AtualizarCategoria(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<DateTime>()))
+                .ReturnsAsync(categoriaEsperada);
+
+            // Act
+            var resultado = await _categoriaService.EditarCategoria(1, "Valido");
+
+            // Assert
+            Assert.IsNotNull(resultado);
+            Assert.AreEqual("Valido", resultado.Nome);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public async Task EditarCategoria_DeveLancarExcecao_QuandoNomeForVazio()
+        {
+            await _categoriaService.EditarCategoria(1, "");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public async Task EditarCategoria_DeveLancarExcecao_QuandoNomeExceder150Caracteres()
+        {
+            var nomeLongo = new string('A', 151);
+            await _categoriaService.EditarCategoria(1, nomeLongo);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public async Task EditarCategoria_DeveLancarExcecao_QuandoNomeTiverSimbolos()
+        {
+            await _categoriaService.EditarCategoria(1, "Categoria!@#");
+        }
+    }
 }

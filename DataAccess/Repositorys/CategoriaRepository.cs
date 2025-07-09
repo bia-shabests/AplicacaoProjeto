@@ -41,5 +41,15 @@ namespace DataAccess.Repositorys
 
             return await DatabaseExecutor.QueryAsync<Categoria>(_connectionStringSql,"Categoria_BuscarCategorias",parametros);
         }
+
+        public async Task<Categoria> AtualizarCategoria(int ID, string novoNome, DateTime dataModificacao)
+        {
+            var parametros = new DynamicParameters();
+            parametros.Add("@ID", ID);
+            parametros.Add("@NovoNome", novoNome);
+            parametros.Add("@DataModificacao", dataModificacao);
+
+            return await DatabaseExecutor.QueryFirstOrDefaultAsync<Categoria>(_connectionStringSql, "Categoria_AtualizarCategoria", parametros);
+        }
     }
 }

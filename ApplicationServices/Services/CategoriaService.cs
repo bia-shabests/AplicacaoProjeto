@@ -21,7 +21,7 @@ namespace ApplicationServices.Services
         {
             _logger.LogInformation("Iniciando validação da categoria: {NomeCategoria}", nomeCategoria);
 
-            ValidarCategoria(nomeCategoria);
+            ValidarNomeCategoria(nomeCategoria);
 
             _logger.LogInformation("Validação concluída. Preparando objeto Categoria.");
 
@@ -35,11 +35,26 @@ namespace ApplicationServices.Services
 
             _logger.LogInformation("Salvando categoria no repositório.");
 
-            var resultado = await _categoriaRepository.CadastrarCategoria(categoria);
+            Categoria resultado = await _categoriaRepository.CadastrarCategoria(categoria);
 
             _logger.LogInformation("Categoria salva com sucesso. ID: {ID}", resultado.ID);
 
             return resultado;
+        }
+
+        public async Task<Categoria> EditarCategoria(int ID, string novoNomeCategoria)
+        {
+            _logger.LogInformation("Iniciando validação da categoria: {NomeCategoria}", novoNomeCategoria);
+
+            ValidarNomeCategoria(novoNomeCategoria);
+
+            _logger.LogInformation("Validação concluída. Preparando objeto Categoria para atualização.");
+
+            Categoria categoriaAtualizada = await _categoriaRepository.AtualizarCategoria(ID, novoNomeCategoria, DateTime.Now);
+
+            _logger.LogInformation("Atualização concluída");
+
+            return categoriaAtualizada;
         }
 
         public async Task<List<Categoria>> BuscarCategorias(int? ID, string? nome, bool? status, string? ordenarPor, string tipoOrdenacao)
@@ -55,14 +70,14 @@ namespace ApplicationServices.Services
 
             string campoOrdenacao = string.IsNullOrEmpty(ordenarPor) ? "ID" : ordenarPor;
 
-            var resultado = await _categoriaRepository.BuscarCategorias(ID, nome, status, campoOrdenacao, tipoOrdenacao);
+            List<Categoria> resultado = await _categoriaRepository.BuscarCategorias(ID, nome, status, campoOrdenacao, tipoOrdenacao);
 
             _logger.LogInformation("Busca concluída. Total encontrado: {Quantidade}", resultado.Count);
 
             return resultado;
         }
 
-        private void ValidarCategoria(string nomeCategoria)
+        private void ValidarNomeCategoria(string nomeCategoria)
         {
             if (string.IsNullOrWhiteSpace(nomeCategoria))
             {
